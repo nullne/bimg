@@ -7,3 +7,5 @@ require (
 	gopkg.in/h2non/bimg.v1 v1.0.19 // indirect
 	gopkg.in/h2non/filetype.v1 v1.0.5 // indirect
 )
+
+replace github.com/h2non/bimg => ./
