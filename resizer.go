@@ -9,7 +9,10 @@ import "C"
 import (
 	"errors"
 	"fmt"
+	"image/png"
 	"math"
+
+	"github.com/ultimate-guitar/go-imagequant"
 )
 
 var (
@@ -132,7 +135,42 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 		return nil, err
 	}
 
-	return saveImage(image, o)
+	bs, err := saveImage(image, o)
+	if err != nil {
+		return nil, err
+	}
+
+	if o.Type == PNG {
+		bs, err = optimizePng(bs, o.Compression)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return bs, nil
+}
+
+func optimizePng(img []byte, c int) ([]byte, error) {
+	compression, err := zlibCompressionLevelToPNG(c)
+	if err != nil {
+		return nil, err
+	}
+	return imagequant.Crush(img, 10, compression)
+}
+
+func zlibCompressionLevelToPNG(zlibLevel int) (png.CompressionLevel, error) {
+	switch zlibLevel {
+	case 0:
+		return png.NoCompression, nil
+	case 9:
+		return png.BestCompression, nil
+	case 1, 2, 3, 4:
+		return png.BestSpeed, nil
+	case 5, 6, 7, 8:
+		return png.DefaultCompression, nil
+	default:
+		return png.DefaultCompression, fmt.Errorf("wrong zlib compression level: %d", zlibLevel)
+	}
 }
 
 func loadImage(buf []byte) (*C.VipsImage, ImageType, error) {
