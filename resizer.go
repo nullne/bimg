@@ -28,6 +28,7 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 		return nil, err
 	}
 	defer runtime.KeepAlive(image)
+	fmt.Println("-----------")
 
 	// Clone and define default options
 	o = applyDefaults(o, imageType)
