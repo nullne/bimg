@@ -10,6 +10,7 @@ import (
 	"errors"
 	"fmt"
 	"math"
+	"runtime"
 )
 
 var (
@@ -26,6 +27,7 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer runtime.KeepAlive(image)
 
 	// Clone and define default options
 	o = applyDefaults(o, imageType)
