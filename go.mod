@@ -1,4 +1,4 @@
-module github.com/h2non/bimg
+module github.com/nullne/bimg
 
 go 1.13
 
@@ -7,4 +7,4 @@ require (
 	gitlab.p1staff.com/backend/magick v1.0.1
 )
 
-replace gitlab.p1staff.com/backend/magick => /root/workspace/go/src/gitlab.p1staff.com/backend/magick
+// replace gitlab.p1staff.com/backend/magick => /root/workspace/go/src/gitlab.p1staff.com/backend/magick
