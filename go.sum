@@ -1,3 +1,5 @@
+github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
+github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
 github.com/ultimate-guitar/go-imagequant v0.0.0-20200215081128-5864ddc9bde3 h1:hfnm3kO0txqa5g88V2XwQC79EvhuOpDvUUJPFAcNOC4=
 github.com/ultimate-guitar/go-imagequant v0.0.0-20200215081128-5864ddc9bde3/go.mod h1:i+Clhf23O1KGsVN8mTevqTQpnjIf4+KaYuXBjX2urSw=
 gopkg.in/h2non/bimg.v1 v1.0.19 h1:Li7mgBrIvCHvShB4nyCcGJ2Z2rWR/95kgI/U2+U2eYw=
