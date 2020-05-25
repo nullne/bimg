@@ -49,7 +49,7 @@ func Resize2(bs []byte, o Options) ([]byte, error) {
 		y := (image.Height() - h) / 2
 		image, err = image.Crop(magick.Rect{X: x, Y: y, Width: uint(w), Height: uint(h)})
 		if err != nil {
-			panic(err)
+			return nil, err
 		}
 	}
 

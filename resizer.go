@@ -157,7 +157,7 @@ func optimizePng(img []byte, c int) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return imagequant.Crush(img, 10, compression)
+	return imagequant.Crush(img, 3, compression)
 }
 
 func zlibCompressionLevelToPNG(zlibLevel int) (png.CompressionLevel, error) {
