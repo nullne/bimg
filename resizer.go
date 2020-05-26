@@ -506,7 +506,14 @@ func imageCalculations(o *Options, inWidth, inHeight int) float64 {
 	// Fixed width and height
 	case o.Width > 0 && o.Height > 0:
 		if o.Crop {
-			factor = math.Min(xfactor, yfactor)
+			if inWidth <= o.Width && inHeight <= o.Height {
+				w := int(math.Min(float64(inWidth), float64(inHeight)))
+				o.Height = w * o.Height / o.Width
+				o.Width = w
+				factor = 1.0
+			} else {
+				factor = math.Min(xfactor, yfactor)
+			}
 		} else {
 			factor = math.Max(xfactor, yfactor)
 		}
