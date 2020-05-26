@@ -142,8 +142,8 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 		return nil, err
 	}
 
-	if o.Type == PNG {
-		bs, err = optimizePng(bs, o.Compression)
+	if o.Type == PNG && o.PNGQuantSpeed != 0 {
+		bs, err = optimizePng(bs, o.PNGQuantSpeed, o.Compression)
 		if err != nil {
 			return nil, err
 		}
@@ -152,12 +152,12 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 	return bs, nil
 }
 
-func optimizePng(img []byte, c int) ([]byte, error) {
+func optimizePng(img []byte, speed, c int) ([]byte, error) {
 	compression, err := zlibCompressionLevelToPNG(c)
 	if err != nil {
 		return nil, err
 	}
-	return imagequant.Crush(img, 3, compression)
+	return imagequant.Crush(img, speed, compression)
 }
 
 func zlibCompressionLevelToPNG(zlibLevel int) (png.CompressionLevel, error) {
@@ -506,7 +506,7 @@ func imageCalculations(o *Options, inWidth, inHeight int) float64 {
 	// Fixed width and height
 	case o.Width > 0 && o.Height > 0:
 		if o.Crop {
-			if inWidth <= o.Width && inHeight <= o.Height {
+			if o.CropKeepRatio && inWidth <= o.Width && inHeight <= o.Height {
 				w := int(math.Min(float64(inWidth), float64(inHeight)))
 				o.Height = w * o.Height / o.Width
 				o.Width = w

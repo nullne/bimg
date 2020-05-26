@@ -224,4 +224,7 @@ type Options struct {
 	Threshold      float64
 	Gamma          float64
 	OutputICC      string
+
+	PNGQuantSpeed int
+	CropKeepRatio bool // keep ratio when image is smaller than target size
 }
